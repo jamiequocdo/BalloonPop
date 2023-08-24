@@ -13,11 +13,25 @@
 
 <body>
     <p class="balloon">🎈</p>
+    <button id="inflate">Inflate</button>
+    <button id="deflate">Deflate</button>
 
     <script>
 //Your Code Here
         const balloon = document.querySelector(".balloon");
+        const inflateButton = document.getElementById("inflate");
+        const deflateButton = document.getElementById("deflate");
+
+
         console.log(balloon);
+        console.log(inflateButton);
+        console.log(deflateButton);
+
+        balloon.addEventListener("keydown", (e) => {
+            if (e.keyCode === "38") {
+                button.style.cssText("fontsize: 100px");
+            }
+        })
 
 
 
