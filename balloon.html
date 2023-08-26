@@ -22,17 +22,21 @@
         const inflateButton = document.getElementById("inflate");
         const deflateButton = document.getElementById("deflate");
 
+        
+            
 
+        document.addEventListener("keydown", (e) => {       //document = the browser
+            let balloonComputedStyle = window.getComputedStyle(balloon);
+            const balloonFontSize = parseFloat(balloonComputedStyle.fontSize);
+            let incrementBalloonSize = (balloonFontSize * 1.10).toString() + "px";
+            
+            if (e.keyCode === 38) {                         //keyCode works in numbers.  Not strings
+                balloon.style.cssText = `font-size: ${incrementBalloonSize}`;
 
-        console.log(balloon);
-        console.log(inflateButton);
-        console.log(deflateButton);
-
-        document.addEventListener("keydown", (e) => {
-            if (e.keyCode === 38) {
-                balloon.style.cssText = "font-size: 50px;";
             }
         })
+        
+            
 
 
 
