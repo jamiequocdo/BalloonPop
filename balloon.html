@@ -29,10 +29,16 @@
             let balloonComputedStyle = window.getComputedStyle(balloon);
             const balloonFontSize = parseFloat(balloonComputedStyle.fontSize);
             let incrementBalloonSize = (balloonFontSize * 1.10).toString() + "px";
+            let decrementBalloonSize = (balloonFontSize - (balloonFontSize * 0.10).toString() + "px");
             
             if (e.keyCode === 38) {                         //keyCode works in numbers.  Not strings
                 balloon.style.cssText = `font-size: ${incrementBalloonSize}`;
-
+                if(balloonFontSize > 20) {
+                    balloon.textContent = "💥";
+                    document.removeEventListener
+                }
+            } else if (e.keyCode === 40) {
+                balloon.style.cssText = `font-size: ${decrementBalloonSize}`;
             }
         })
         
