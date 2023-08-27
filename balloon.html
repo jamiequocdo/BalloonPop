@@ -6,15 +6,50 @@
     <title>Balloon Pop</title>
 
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
 
+        .balloon-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 20px;
+            width: 100px;
+            height: 100px;
+        }
+
+        .balloon {
+            font-size: 1rem;
+            transition: font-size 0.2s ease;
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .buttons {
+            display: flex;
+            margin-top: 20px;
+            gap: 20px;
+        }
 
     </style>
 </head>
 
 <body>
-    <p class="balloon">🎈</p>
-    <button id="inflate">Inflate</button>
-    <button id="deflate">Deflate</button>
+    <div class="balloon-container">
+        <p class="balloon">🎈</p>
+    </div>
+    
+    <div class="buttons">
+        <button id="inflate">Inflate</button>
+        <button id="deflate">Deflate</button>
+    </div>
 
     <script>
 //Your Code Here
@@ -34,13 +69,39 @@
                     balloon.textContent = "💥";
                     document.removeEventListener("keydown", balloonSizing);
                 }
-            } else if (e.keyCode === 40) {
+            } else if (e.keyCode === 40 && balloonFontSize > 16 && balloon.textContent !== "💥") {
                 balloon.style.cssText = `font-size: ${decrementBalloonSize}`;
             }
         }
+
+        function inflateBalloon() {
+            let balloonComputedStyle = window.getComputedStyle(balloon);
+            const balloonFontSize = parseFloat(balloonComputedStyle.fontSize);
+            let incrementBalloonSize = (balloonFontSize * 1.10).toString() + "px";
+            let decrementBalloonSize = (balloonFontSize - (balloonFontSize * 0.10).toString() + "px");
+            balloon.style.cssText = `font-size: ${incrementBalloonSize}`;
+                if(balloonFontSize > 20) {
+                    balloon.textContent = "💥";
+                    inflateButton.removeEventListener("click", inflateBalloon);
+                }
+        }
+
+        function deflateBalloon() {
+            let balloonComputedStyle = window.getComputedStyle(balloon);
+            const balloonFontSize = parseFloat(balloonComputedStyle.fontSize);
+            let incrementBalloonSize = (balloonFontSize * 1.10).toString() + "px";
+            let decrementBalloonSize = (balloonFontSize - (balloonFontSize * 0.10).toString() + "px");
+            if (balloonFontSize > 16 && balloon.textContent !== "💥") {
+                balloon.style.cssText = `font-size: ${decrementBalloonSize}`;
+            }
+        }
+
             
 
         document.addEventListener("keydown", balloonSizing);
+
+        inflateButton.addEventListener("click", inflateBalloon);
+        deflateButton.addEventListener("click", deflateBalloon);
         
             
 
